@@ -1,7 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{D509F01E-0939-451A-974A-94B101DA1184}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.DAL", "Web.DAL\Web.DAL.csproj", "{033DA3FB-2928-47C2-8009-5A331DB6A775}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D509F01E-0939-451A-974A-94B101DA1184}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D509F01E-0939-451A-974A-94B101DA1184}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D509F01E-0939-451A-974A-94B101DA1184}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D509F01E-0939-451A-974A-94B101DA1184}.Release|Any CPU.Build.0 = Release|Any CPU
+		{033DA3FB-2928-47C2-8009-5A331DB6A775}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{033DA3FB-2928-47C2-8009-5A331DB6A775}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{033DA3FB-2928-47C2-8009-5A331DB6A775}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{033DA3FB-2928-47C2-8009-5A331DB6A775}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
