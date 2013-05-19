@@ -23,16 +23,6 @@ namespace Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            using (EntitiesContext context = new EntitiesContext())
-            {
-                if (context.Students.Count() > 0)
-                {
-                    context.Students.Add(new Student() {Firstname = "Luke", Lastname = "Skywalker"});
-                    context.Students.Add(new Student() {Firstname = "Obiwan", Lastname = "Kenovi"});
-                    context.SaveChanges();
-                }
-            }
         }
     }
 }
