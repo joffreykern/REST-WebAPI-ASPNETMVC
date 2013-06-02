@@ -28,12 +28,6 @@ namespace Web.Controllers
             return this.context.Students.Find(id);
         }
 
-        [ActionName("name")]
-        public Student GetStudentByName(string param = "")
-        {
-            return new Student() {Firstname = param};
-        }
-            
         [HttpPost]
         public void Post(Student student)
         {
