@@ -25,24 +25,47 @@ namespace Web.Controllers
 
         public Student GetStudent(int id)
         {
-            return this.context.Students.Find(id);
+            Student student = this.context.Students.Find(id);
+
+            if (student == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            return student;
         }
 
         [ActionName("name")]
         public Student GetStudentByName(string param = "")
         {
-            return new Student() {Firstname = param};
+            Student student = this.context.Students.FirstOrDefault(x => x.Firstname == param);
+            if (student == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            return student;
         }
             
         [HttpPost]
-        public void Post(Student student)
+        public HttpResponseMessage Post(Student student)
         {
-            this.context.Students.Add(student);
-            this.context.SaveChanges();
+            try
+            {
+                this.context.Students.Add(student);
+                this.context.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+                throw new HttpResponseException(HttpStatusCode.InternalServerError);
+            }
+
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
         [HttpPut]
-        public void Put(int id, Student student)
+        public HttpResponseMessage Put(int id, Student student)
         {
             Student s = this.context.Students.Find(id);
             if (s != null)
@@ -50,17 +73,28 @@ namespace Web.Controllers
                 s.Firstname = student.Firstname;
                 s.Lastname = student.Lastname;
                 this.context.SaveChanges();
+
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.NotFound);
             }
         }
 
         [HttpDelete]
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
             Student student = this.context.Students.Find(id);
             if (student != null)
             {
                 this.context.Students.Remove(student);
                 this.context.SaveChanges();
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.NotFound);
             }
         }
 
