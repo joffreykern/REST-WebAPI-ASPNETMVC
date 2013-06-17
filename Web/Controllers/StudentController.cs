@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using Web.DAL;
 
@@ -18,6 +19,7 @@ namespace Web.Controllers
             this.context = new EntitiesContext();
         }
 
+        [HttpGet]
         public List<Student> GetStudents()
         {
             return this.context.Students.ToList();
@@ -35,26 +37,28 @@ namespace Web.Controllers
             return student;
         }
 
-        [ActionName("name")]
-        public Student GetStudentByName(string param = "")
-        {
-            Student student = this.context.Students.FirstOrDefault(x => x.Firstname == param);
-            if (student == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
+[ActionName("name")]
+public Student GetStudentByName(string param)
+{
+    Student student = this.context.Students.FirstOrDefault(x => x.Firstname == param);
+    if (student == null)
+    {
+        throw new HttpResponseException(HttpStatusCode.NotFound);
+    }
 
-            return student;
-        }
+    return student;
+}
             
         [HttpPost]
         public HttpResponseMessage Post(Student student)
         {
+            if (string.IsNullOrEmpty(student.Firstname))
+                throw new HttpException(500, "missing Student's name");
+
             try
             {
                 this.context.Students.Add(student);
                 this.context.SaveChanges();
-
             }
             catch (Exception)
             {
